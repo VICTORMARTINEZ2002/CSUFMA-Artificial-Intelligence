@@ -28,18 +28,3 @@ void readCSV(const string& filename, vector<vector<float>>& vet){
 
     file.close(); 
 }
-
-// int main(){
-//     string filename = "../Data/data.csv";
-//     vector<vector<float>> people;
-//     readCSV(filename, people);
-
-//     for(size_t i=0; i<=people.size()-1; i++){
-//         for(size_t j=0; j<=people[i].size()-1; j++){
-//             cout << people[i][j] << " ";
-//         }
-//         cout << endl;
-//     }
-
-//     return 0;
-// }
