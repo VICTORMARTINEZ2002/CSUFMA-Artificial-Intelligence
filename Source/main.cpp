@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "Classes/Population.cpp"
 #include "readCsv.cpp"
 #include "bestFit.cpp"
 //#include "geneticAlgorithm.cpp"
@@ -28,7 +29,7 @@ int main(){
     }
     printf("Dist M = %lf\n", fitness(acessP,people,s));
     
-    População P;
+    Population P;
     IniciaPop(&P, MAXPOP, people);
     erro = (double) P.indiv[P.melhor].fit - SOLUCAO;
 
@@ -52,13 +53,6 @@ int main(){
         }
         erro = (double) P.indiv[P.melhor].fit - SOLUCAO;
 
-        
-        if(flag_teste && mustSendBuffer(buffer, MAXGER-numGeracoes)){
-            flag_teste = false;
-            MPI_Send(buffer, 1, bufferTypeMPI, RANK_GPILHA, TAG_MESTRE, MPI_COMM_WORLD);
-            //emptyBuffer(buffer);
-            printf("Enviei");
-        }
         numGeracoes--;
 
     }
