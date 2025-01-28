@@ -35,8 +35,7 @@ void bestFit(vector<int>& s, vector<vector<float>> people, vector<vector<float>>
 	for(int i=0; i<=QTD_PESSOAS-1; i++){
 		for(int j=0; j<=QTD_ACESSOP-1; j++){
 			distances[i][j] = dist(acessP, people, j, i);
-			//printf("%lf_\n", distances[i][j]);
-		} //printf("\n");
+		}
 	}
 
 	// Melhoria: Considerar como vetor e ordenar com nlogn;
