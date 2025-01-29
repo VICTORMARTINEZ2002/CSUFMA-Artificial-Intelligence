@@ -1,30 +1,30 @@
-# Makefile for Windows (using MinGW or MSYS2)
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11
 
-CC = gcc
-CFLAGS = -Wall -g
+# Target executable
+TARGET = main
 
-# Target executable name
-TARGET = main.exe
+# Source files
+SRCS = Source/main.cpp Source/Metrics/metrics.cpp Source/Functions/auxFunc.cpp Source/Leitura/read.cpp
 
-# Object files
-OBJS = bestFit.o main.o
+# Object files (create object files in the same directories as source files)
+OBJS = $(SRCS:%.cpp=%.o)
 
-# Default target
-all: $(TARGET)
+# Include directories
+INCLUDES = -I./Source/Metrics -I./Source/Leitura -I./Source/Functions
 
-# Link the object files and create the executable
+# Build the executable
 $(TARGET): $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Compile main.cpp to create main.o
-main.o: main.cpp bestFit.h
-	$(CC) $(CFLAGS) -c main.cpp
+# Compile source files into object files
+Source/%.o: Source/%.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-# Compile myFunctions.cpp to create myFunctions.o
-bestFit.o:
-	$(CC) $(CFLAGS) -c bestFit.cpp
+# Debugging: print object files
+print_objs:
+	@echo $(OBJS)
 
-
-# Clean up object files and the executable
+# Clean up build files
 clean:
-	del /f /q *.o $(TARGET)
+	rm -f $(OBJS) $(TARGET)

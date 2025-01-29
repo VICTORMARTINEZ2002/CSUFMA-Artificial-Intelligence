@@ -1,3 +1,4 @@
+#include "../Metrics/Metrics.h"
 #include "Individuo.cpp"
 
 class Population{
@@ -23,7 +24,7 @@ public:
 		this->acessP    = acessP;
 		this->people    = people;
 		this->tamInd    = people.size();
-		this->qtdAcessP = acessP.size()-1; //tirar o limite
+		this->qtdAcessP = acessP.size();
 		this->indiv     = std::vector<Individuo>(maxPop, Individuo(tamInd));
 
 		this->sumFit  =  0;
@@ -60,7 +61,7 @@ public:
   
 
 	// Methods
-	initPopulacao(){
+	void initPopulacao(){
 		this->pior=0;
 		this->best=0;
 		this->sumFit=0;
@@ -68,12 +69,12 @@ public:
 		this->bestGer=1;
 		this->numMuta=0;
 		for(int i=0; i<=tamPop-1; i++){
-			double fit;
 			indiv[i].initIndividuo(this->acessP, this->people);
 			this->sumFit += indiv[i].getFit();
 			if(indiv[i].getFit()>indiv[this->pior].getFit()){this->pior=i;}
 			if(indiv[i].getFit()<indiv[this->best].getFit()){this->best=i;}
 		}
+		return;
 	}
 
 };

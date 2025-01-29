@@ -6,18 +6,12 @@
 #include <cmath>
 #include <limits>
 
+#include "Leitura/read.h"
+#include "Metrics/metrics.h"
+
 #define MAXDOUBLE std::numeric_limits<double>::max()
 
 using namespace std;
-
-double dist(vector<vector<float>> acessP, vector<vector<float>> people, int a, int p){
-	double dist=0;
-	int dim = acessP[0].size()-1;
-	for(int i=0; i<=dim-1; i++){
-		dist += pow(acessP[a][i]-people[p][i], 2);
-	}
-	return sqrt(dist);
-}
 
 void bestFit(vector<int>& s, vector<vector<float>> people, vector<vector<float>> acessP){
 	int QTD_PESSOAS = people.size();
@@ -34,7 +28,7 @@ void bestFit(vector<int>& s, vector<vector<float>> people, vector<vector<float>>
 	vector<vector<float>> distances(QTD_PESSOAS, vector<float>(QTD_ACESSOP));
 	for(int i=0; i<=QTD_PESSOAS-1; i++){
 		for(int j=0; j<=QTD_ACESSOP-1; j++){
-			distances[i][j] = dist(acessP, people, j, i);
+			distances[i][j] = euclideanMetric(acessP, people, j, i);
 		}
 	}
 

@@ -15,8 +15,8 @@ extern void IniciaPop(Populacao *p, int popSize, int qtdPessoas){
 	double soma=0;
 	double fit;
 
-	for(size_t i=0; i<=popSize-1; i++){
-		for(size_t j=0; j<=qtdPessoas-1; j++){
+	for(int i=0; i<=popSize-1; i++){
+		for(int j=0; j<=qtdPessoas-1; j++){
 			p->indiv[i].var[j] = (int)rand()%2;
 		}
 		fit = funccod[nfun](p->indiv[i].var, n);

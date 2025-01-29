@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -24,7 +23,6 @@ void readCSV(const string& filename, vector<vector<float>>& vet){
         }
         vet.push_back(row);
     }
-
 
     file.close(); 
 }
