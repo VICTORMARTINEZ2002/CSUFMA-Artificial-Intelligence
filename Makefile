@@ -23,8 +23,12 @@ Source/%.o: Source/%.cpp
 
 # Debugging: print object files
 print_objs:
-	@echo $(OBJS)
+	@echo "Object files: $(OBJS)"
 
 # Clean up build files
 clean:
 	rm -f $(OBJS) $(TARGET)
+	@echo "Cleaned up object files and executable."
+
+# Phony targets
+.PHONY: clean print_objs

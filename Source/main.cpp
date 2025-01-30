@@ -39,8 +39,9 @@ int main(){
     printf("aboveLimt  = %d\n", aboveLimt(acessP,s));
     
 
-    // Population P;
-    // IniciaPop(&P, MAXPOP, people);
+    Population p(acessP, people, MAXPOP);
+    p.initPopulacao();
+    p.print();
     // erro = (double) P.indiv[P.melhor].fit - SOLUCAO;
 
     // clock_t start = clock();

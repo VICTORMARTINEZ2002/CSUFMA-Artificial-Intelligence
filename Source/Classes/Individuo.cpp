@@ -46,8 +46,10 @@ public:
 
 	// Methods
 	void initIndividuo(vector<vector<float>> acessP, vector<vector<float>> people){
-		srand(time(NULL));
-		for(size_t i=0; i<=var.size()-1; i++){var[i]=rand()%(acessP.size()-1);}
+		for(size_t i=0; i<=var.size()-1; i++){
+			var[i]=rand()%(acessP.size()+1);
+			var[i]--; // Incluir o -1
+		}
 		this->fit = fitness(acessP, people, this->var);
 		this->out = outs();
 	}
@@ -61,9 +63,11 @@ public:
 
 	void resizeVars(int newSize, int defaultValue = 0){var.resize(newSize, defaultValue);}
 
-	void print() const{
-		std::cout << "Variables: ";
-		for(int v : var){std::cout << v << " ";}
-		std::cout << "\nFitness: " << fit << "\nNon Connected: " << out << "\n";
+	void    print(){for(int v : var){std::cout << v  << " ";}}
+	void printFit(){std::cout <<   "\nFitness: " << fit;}
+	void printNoC(){std::cout << "\nNo Connct: " << out;}
+	void printAbL(vector<vector<float>> acessP){
+		std::cout << "\nAbv Limit: " << aboveLimt(acessP, this->var);
 	}
+
 };

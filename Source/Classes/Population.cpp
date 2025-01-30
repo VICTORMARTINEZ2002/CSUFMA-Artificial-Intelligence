@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "../Metrics/Metrics.h"
 #include "Individuo.cpp"
 
@@ -6,16 +8,16 @@ private:
 	std::vector<std::vector<float>> acessP;
 	std::vector<std::vector<float>> people;
 	std::vector<Individuo> indiv; // Vector to store individuals 
-	int tamPop;                    // Size of the population
-	int tamInd;                    // Size of each individual
-	int qtdAcessP;                 // Qtd pontos de acesso
+	int tamPop;                   // Size of the population
+	int tamInd;                   // Size of each individual
+	int qtdAcessP;                // Qtd pontos de acesso
 
-	double sumFit;                 // Sum of fitness of the population	
-	int best;                    // Position of the best individual
-	int pior;                      // Position of the worst individual
-	int numMuta;                   // Number of mutations
-	int iguais;                    // Count of reproductions with identical parents
-	int bestGer;                 // Generation of the best individual
+	double sumFit;                // Sum of fitness of the population	
+	int best;                     // Position of the best individual
+	int pior;                     // Position of the worst individual
+	int numMuta;                  // Number of mutations
+	int iguais;                   // Count of reproductions with identical parents
+	int bestGer;                  // Generation of the best individual
 
 
 public:
@@ -75,6 +77,18 @@ public:
 			if(indiv[i].getFit()<indiv[this->best].getFit()){this->best=i;}
 		}
 		return;
+	}
+
+	void print(){
+		cout << "Imprimindo a População\n";
+		for(size_t i=0; i<=this->indiv.size()-1; i++){
+			cout << "Indv " << i << ": ";
+			this->indiv[i].print();
+			this->indiv[i].printFit();
+			this->indiv[i].printNoC();
+			this->indiv[i].printAbL(acessP);
+			cout << endl;
+		}
 	}
 
 };

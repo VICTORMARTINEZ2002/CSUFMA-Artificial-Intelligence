@@ -4,6 +4,9 @@
 #include "../Metrics/Metrics.h"
 using namespace std;
 
+// Declarações
+int aboveLimt(vector<vector<float>>, vector<int>);
+
 double fitness(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao){
 	int notConect=0;
 	double  max_dist = 0;
@@ -25,15 +28,9 @@ double fitness(vector<vector<float>> acessP, vector<vector<float>> people, vecto
 	penl_nConetado += notConect * (max_dist+10);
 	
 	// Penalizar Violação Limite
-	double penl_Limite = 0;
-	for(size_t i=0; i<=contConect.size()-1; i++){
-		if(contConect[i]>(int)acessP[i][acessP.size()-1]){
-			penl_Limite += (3*max_dist) * abs(contConect[i]-acessP[i][acessP.size()-1]);
-		}
-	}
-
-	return mean_dist+penl_nConetado;//+penl_Limite);
-	//return (mean_dist+penl_nConetado+penl_Limite)/solucao.size();
+	double penl_Limite = (3*max_dist) * aboveLimt(acessP, solucao);
+	
+	return (mean_dist+penl_nConetado+penl_Limite)/solucao.size();
 }
 
 
@@ -68,9 +65,11 @@ int aboveLimt(vector<vector<float>> acessP, vector<int> solucao){
 	for(size_t i=0; i<=solucao.size()-1; i++){
 		if(solucao[i]!=-1){contConect[solucao[i]]++;}
 	}
+	int lim;
 	int sum=0;
 	for(size_t i=0; i<=contConect.size()-1; i++){
-		sum += contConect[i];
+		lim = (int)acessP[i][acessP[0].size()-1];
+		sum += max(0, contConect[i] - lim);
 	} return sum;
 }
 
