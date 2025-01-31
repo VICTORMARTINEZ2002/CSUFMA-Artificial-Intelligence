@@ -20,7 +20,8 @@
 
 #define MAXPOP 100
 #define MAXGER 50
-#define NUMCRU 50
+#define NUMCRU 85
+#define PMUTAC 20
 
 using namespace std;
 
@@ -66,21 +67,21 @@ int main(){
 
 	clock_t start = clock();
 	while((currGer<MAXGER) && (erro>(double)1.0)){
-		printf("Ger %d\n", currGer);
-	    int numCruza = NUMCRU;
-	    while(numCruza--){
-	        int pa1 = Selecao(p);
-	        int pa2 = Selecao(p);
-	        if(pa1!=pa2){CrossOver(p, pa1, pa2);}else{p.iguais++;}
-	        // if(PMUTAC > rand()%100){
-	        //     nu_mutate(P.indiv[P.pior].var, P.tamInd, P.tamPop, MAXGER - numGeracoes, MNUNI);
-	        //     P.numMuta ++;
-	        // }
-	        double fit = fitness(acessP, people, p.indiv[p.pior].var);
-	        AtualizaPop(p, p.pior, fit, currGer);
-	    }
-	    erro = (double) p.indiv[p.best].fit - best.fit;
-	    currGer++;
+		int numCruza = NUMCRU;
+		while(numCruza--){
+			int pa1 = Selecao(p);
+			int pa2 = Selecao(p);
+			if(pa1!=pa2){CrossOver(p, pa1, pa2);}else{p.iguais++;}
+			if(PMUTAC > rand()%100){
+				mutate(p, p.pior);
+				p.numMuta ++;
+			}
+			double fit = fitness(acessP, people, p.indiv[p.pior].var);
+			AtualizaPop(p, p.pior, fit, currGer);
+		}
+		erro = (double) p.indiv[p.best].fit - best.fit;
+		printf("Erro da Geração %d: %.2lf\n", currGer, erro);
+		currGer++;
 	}
 	clock_t end = clock();
 	double time = (double)(end - start) / CLOCKS_PER_SEC;
@@ -89,7 +90,7 @@ int main(){
 	// for(size_t i=0; i<=s.size()-1; i++){
 	// 	cout << p.indiv[p.best].var[i] << " ";
 	// } 
-	printStatusSolution(acessP, people, best.var);
+	printStatusSolution(acessP, people, p.indiv[p.best].var);
 
 	printf("Tempo do AG: %lf\n", time);
 	printf("Fim do Programa.\n\n\n");

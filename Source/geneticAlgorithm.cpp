@@ -54,3 +54,13 @@ void AtualizaPop(Population& p, int pos, double fit, int ger){
 	}
 
 }
+
+void mutate(Population& p, int pos){
+	int i = rand()%(p.tamInd);
+	int j = rand()%(p.tamInd);
+	if(i!=j){
+		int aux = p.indiv[pos].var[i];
+        p.indiv[pos].var[i] = p.indiv[pos].var[j];
+        p.indiv[pos].var[j] = aux;
+	}
+}
