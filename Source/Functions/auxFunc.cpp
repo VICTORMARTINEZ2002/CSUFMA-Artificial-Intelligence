@@ -1,17 +1,32 @@
-#include <vector>
+#include <stdio.h>
+
 #include <cmath>
+#include <vector>
 #include <iostream>
+
 #include "../Metrics/Metrics.h"
+
 using namespace std;
 
 // Declarações
-int aboveLimt(vector<vector<float>>, vector<int>);
+int aboveLimt(const vector<vector<float>>& acessP, const vector<int>& solucao){
+	vector<int> contConect(acessP.size(), 0);
+	for(size_t i=0; i<=solucao.size()-1; i++){
+		if(solucao[i]!=-1){contConect[solucao[i]]++;}
+	}
+	int sum=0;
+	for(size_t i=0; i<=contConect.size()-1; i++){
+		int lim = (int)acessP[i][acessP[0].size()-1];
+		sum += max(0, contConect[i] - lim);
+	} return sum;
+}
 
-double fitness(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao){
+
+double fitness(const vector<vector<float>>& acessP, const vector<vector<float>>& people, const vector<int>& solucao){
 	int notConect=0;
 	double  max_dist = 0;
 	double mean_dist = 0;
-	std::vector<int> contConect(acessP.size(), 0);
+	vector<int> contConect(acessP.size(), 0);
 
 	// Calculo Mean Distancias
 	for(size_t i=0; i<=solucao.size()-1; i++){
@@ -35,7 +50,7 @@ double fitness(vector<vector<float>> acessP, vector<vector<float>> people, vecto
 
 
 
-double meanDist(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao){
+double meanDist(const vector<vector<float>>& acessP, const vector<vector<float>>& people, const vector<int>& solucao){
 	int cont=0;
 	double dist = 0;
 	for(size_t i=0; i<=solucao.size()-1; i++){
@@ -45,7 +60,7 @@ double meanDist(vector<vector<float>> acessP, vector<vector<float>> people, vect
 	return dist/cont;
 }
 
-double sumDist(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao){
+double sumDist(const vector<vector<float>>& acessP, const vector<vector<float>>& people, const vector<int>& solucao){
 	double dist = 0;
 	for(size_t i=0; i<=solucao.size()-1; i++){
 		dist += euclideanMetric(acessP, people, solucao[i], i);;
@@ -53,28 +68,15 @@ double sumDist(vector<vector<float>> acessP, vector<vector<float>> people, vecto
 	return dist;
 }
 
-vector<int> acessPointDistribution(std::vector<std::vector<float>> acessP, std::vector<int> solucao){
-	std::vector<int> contConect(acessP.size(), 0);
-	for(size_t i=0; i<=solucao.size()-1; i++){
-		if(solucao[i]!=-1){contConect[solucao[i]]++;}
-	} return contConect;
-}
-
-int aboveLimt(vector<vector<float>> acessP, vector<int> solucao){
-	std::vector<int> contConect(acessP.size(), 0);
+void acessPointDistribution(const vector<vector<float>>& acessP, const vector<int>& solucao, vector<int>& contConect){
+	contConect.resize(acessP.size(), 0);
 	for(size_t i=0; i<=solucao.size()-1; i++){
 		if(solucao[i]!=-1){contConect[solucao[i]]++;}
 	}
-	int lim;
-	int sum=0;
-	for(size_t i=0; i<=contConect.size()-1; i++){
-		lim = (int)acessP[i][acessP[0].size()-1];
-		sum += max(0, contConect[i] - lim);
-	} return sum;
 }
 
 
-int nonConect(vector<int> solucao){
+int nonConect(const vector<int>& solucao){
 	int cont = 0;
 	for(size_t i=0; i<=solucao.size()-1; i++){
 		if(solucao[i]==-1){cont++;}
@@ -82,4 +84,15 @@ int nonConect(vector<int> solucao){
 	return cont;
 }
 
+// ---------------------------------------------
+void printStatusSolution(const vector<vector<float>>& acessP, const vector<vector<float>>& people, const vector<int>& solucao){
+	printf("\nFitness = %lf\n",   fitness(acessP,people,solucao) );
+	printf("Dist Mean = %lf\n",   meanDist(acessP,people,solucao));
+	printf("nonConect = %d\n", nonConect(solucao)             );
+	printf("aboveLimt = %d\n", aboveLimt(acessP,solucao)      );
+	vector<int> contConect;     acessPointDistribution(acessP, solucao, contConect);
 
+	cout << "Conections Distribution: ";
+	for(size_t i=0; i<=contConect.size()-1; i++){cout << contConect[i] << " ";}
+	cout << endl;
+}

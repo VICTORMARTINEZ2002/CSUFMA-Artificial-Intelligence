@@ -26,7 +26,7 @@ print_objs:
 	@echo "Object files: $(OBJS)"
 
 # Clean up build files
-clean:
+cls:
 	rm -f $(OBJS) $(TARGET)
 	@echo "Cleaned up object files and executable."
 

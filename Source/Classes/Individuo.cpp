@@ -13,7 +13,7 @@ using namespace std;
 
 
 class Individuo{
-private:
+public:
 	std::vector<int> var;
 	double fit = 0.0;
 	int out    = 0;
@@ -39,9 +39,9 @@ public:
 	void setVars(const std::vector<int>& var){this->var=var;}
 	void setFit(double fit){this->fit = fit;}
 	void setOut(   int out){this->out = out;}
-	void setVar(size_t index, int value){
-		if(index<var.size()){var.at(index)=value;}
-		else{printf("Error - setVar Individuo");}
+	void setVar(std::vector<int> var){
+		this->var = std::vector<int>(var.size());
+		for(size_t i=0; i<=var.size()-1; i++){this->var[i]=var[i];}
 	}
 
 	// Methods

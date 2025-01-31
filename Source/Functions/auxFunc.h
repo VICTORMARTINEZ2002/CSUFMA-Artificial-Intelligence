@@ -1,16 +1,44 @@
-#ifndef FITNESS_H
-	#define FITNESS_H
+#ifndef AUXFUNC_H
+	#define AUXFUNC_H
 
 	#include <vector>
-	using namespace std;
 
-	double  fitness(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao);
-	double meanDist(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao);
-	double  sumDist(vector<vector<float>> acessP, vector<vector<float>> people, vector<int> solucao);
-	vector<int> acessPointDistribution(vector<vector<float>> acessP, vector<int> solucao);
-	int   aboveLimt(vector<vector<float>> acessP, vector<int> solucao);
-	int   nonConect(vector<int> solucao);
+	// Function declarations
+	double fitness(
+	    const std::vector<std::vector<float>>& acessP, 
+	    const std::vector<std::vector<float>>& people, 
+	    const std::vector<int>& solucao
+	);
 
-	
+	double meanDist(
+	    const std::vector<std::vector<float>>& acessP, 
+	    const std::vector<std::vector<float>>& people, 
+	    const std::vector<int>& solucao
+	);
 
-#endif // FITNESS_H
+	double sumDist(
+	    const std::vector<std::vector<float>>& acessP, 
+	    const std::vector<std::vector<float>>& people, 
+	    const std::vector<int>& solucao
+	);
+
+	void acessPointDistribution(
+	    const std::vector<std::vector<float>>& acessP, 
+	    const std::vector<int>& solucao, 
+	    std::vector<int>& contConect
+	);
+
+	int aboveLimt(
+		const std::vector<std::vector<float>>& acessP,
+		const std::vector<int>& solucao
+	);
+
+	int nonConect(const std::vector<int>& solucao);
+
+	void printStatusSolution(
+		const std::vector<std::vector<float>>& acessP,
+		const std::vector<std::vector<float>>& people,
+		const std::vector<int>& solucao
+	);
+
+#endif // AUXFUNC_H

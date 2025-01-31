@@ -6,19 +6,21 @@
 #include <cmath>
 #include <limits>
 
+
 #include "Leitura/read.h"
 #include "Metrics/metrics.h"
+//#include "Classes/Individuo.cpp"
+// Isso funciona mesmo comentado pq a main deu import (Gambiarra)
 
 #define MAXDOUBLE std::numeric_limits<double>::max()
 
 using namespace std;
 
-void bestFit(vector<int>& s, vector<vector<float>> people, vector<vector<float>> acessP){
+Individuo bestFit(vector<int> s, vector<vector<float>> people, vector<vector<float>> acessP){
 	int QTD_PESSOAS = people.size();
 	int QTD_ACESSOP = acessP.size();
 	int LIMACSP = acessP[0].size()-1;
 
-	//	vector<int> s(people.size(), -1); // Solução
 	vector<int> c(QTD_ACESSOP,  0); // Contador de Conecções
 
 	int maxCap=0;
@@ -52,5 +54,8 @@ void bestFit(vector<int>& s, vector<vector<float>> people, vector<vector<float>>
 		distances[menorp][menorw]=MAXDOUBLE;
 		s[menorp]=menorw;
 	}
-	
+
+	Individuo is(people[0].size());	
+	is.setVar(s);	
+	return is;
 }

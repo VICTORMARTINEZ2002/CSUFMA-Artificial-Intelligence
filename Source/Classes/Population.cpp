@@ -4,7 +4,7 @@
 #include "Individuo.cpp"
 
 class Population{
-private:
+public:
 	std::vector<std::vector<float>> acessP;
 	std::vector<std::vector<float>> people;
 	std::vector<Individuo> indiv; // Vector to store individuals 
