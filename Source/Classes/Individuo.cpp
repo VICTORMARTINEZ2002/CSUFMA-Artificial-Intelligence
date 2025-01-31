@@ -13,7 +13,7 @@ using namespace std;
 
 
 class Individuo{
-public:
+public: // Public por Preguiça
 	std::vector<int> var;
 	double fit = 0.0;
 	int out    = 0;
@@ -43,6 +43,7 @@ public:
 		this->var = std::vector<int>(var.size());
 		for(size_t i=0; i<=var.size()-1; i++){this->var[i]=var[i];}
 	}
+	void fixOut(){this->out = outs();}
 
 	// Methods
 	void initIndividuo(vector<vector<float>> acessP, vector<vector<float>> people){
