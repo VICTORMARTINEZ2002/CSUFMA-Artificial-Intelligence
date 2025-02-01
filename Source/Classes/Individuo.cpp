@@ -48,8 +48,8 @@ public:
 	// Methods
 	void initIndividuo(vector<vector<float>> acessP, vector<vector<float>> people){
 		for(size_t i=0; i<=var.size()-1; i++){
-			var[i]=rand()%(acessP.size()+1);
-			var[i]--; // Incluir o -1
+			var[i]=rand()%(acessP.size());
+			//var[i]--; // Incluir o -1
 		}
 		this->fit = fitness(acessP, people, this->var);
 		this->out = outs();

@@ -19,9 +19,9 @@
 #define ACESSP_PATH "Data/acessPoint.csv"
 
 #define MAXPOP 100
-#define MAXGER 50
+#define MAXGER 10
 #define NUMCRU 85
-#define PMUTAC 20
+#define PMUTAC 75
 
 using namespace std;
 
@@ -73,7 +73,7 @@ int main(){
 			int pa2 = Selecao(p);
 			if(pa1!=pa2){CrossOver(p, pa1, pa2);}else{p.iguais++;}
 			if(PMUTAC > rand()%100){
-				mutate(p, p.pior);
+				mutate(p, p.pior, currGer/MAXGER);
 				p.numMuta ++;
 			}
 			double fit = fitness(acessP, people, p.indiv[p.pior].var);
@@ -87,9 +87,9 @@ int main(){
 	double time = (double)(end - start) / CLOCKS_PER_SEC;
 
 	cout << "Melhor Solução: ";
-	// for(size_t i=0; i<=s.size()-1; i++){
-	// 	cout << p.indiv[p.best].var[i] << " ";
-	// } 
+	for(size_t i=0; i<=s.size()-1; i++){
+		cout << p.indiv[p.best].var[i] << " ";
+	} 
 	printStatusSolution(acessP, people, p.indiv[p.best].var);
 
 	printf("Tempo do AG: %lf\n", time);

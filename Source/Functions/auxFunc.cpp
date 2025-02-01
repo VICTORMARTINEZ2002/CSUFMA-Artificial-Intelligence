@@ -31,19 +31,23 @@ double fitness(const vector<vector<float>>& acessP, const vector<vector<float>>&
 	// Calculo Mean Distancias
 	for(size_t i=0; i<=solucao.size()-1; i++){
 		if(solucao[i]!=-1){
+			contConect[solucao[i]]++;
 			double d = euclideanMetric(acessP, people, solucao[i], i);
 			if(d>max_dist){max_dist=d;}
 			mean_dist += d;
-			contConect[solucao[i]]++;
 		}else{notConect++;}
+	}
+	int sum=0;
+	for(size_t i=0; i<=contConect.size()-1; i++){
+		int lim = (int)acessP[i][acessP[0].size()-1];
+		sum += max(0, contConect[i] - lim);
 	}
 
 	// Penalizar Não Conectados
-	double penl_nConetado = 0.0;
-	penl_nConetado += notConect * (max_dist+10);
+	double penl_nConetado = notConect * (max_dist+10);
 	
 	// Penalizar Violação Limite
-	double penl_Limite = (3*max_dist) * aboveLimt(acessP, solucao);
+	double penl_Limite = (3*max_dist) * sum;
 	
 	return (mean_dist+penl_nConetado+penl_Limite)/solucao.size();
 }

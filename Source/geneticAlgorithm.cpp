@@ -7,7 +7,7 @@
 #define RAND_01 (static_cast<float>(rand()) / static_cast<float>(RAND_MAX))
 
 
-#define FATOR 1
+#define FATOR .3
 int Selecao(const Population& p){
 	double val = 0.0;
 	double spin_val = RAND_01 * p.sumFit;
@@ -55,12 +55,16 @@ void AtualizaPop(Population& p, int pos, double fit, int ger){
 
 }
 
-void mutate(Population& p, int pos){
-	int i = rand()%(p.tamInd);
-	int j = rand()%(p.tamInd);
-	if(i!=j){
-		int aux = p.indiv[pos].var[i];
-        p.indiv[pos].var[i] = p.indiv[pos].var[j];
-        p.indiv[pos].var[j] = aux;
-	}
+void mutate(Population& p, int pos, double frac){
+	if(frac>.5){
+		for(int k=0; k<=(frac*FATOR*p.tamInd); k++){ 
+			int i = rand()%(p.tamInd);
+			int j = rand()%(p.tamInd);
+			if(i!=j){
+				int aux = p.indiv[pos].var[i];
+				p.indiv[pos].var[i] = p.indiv[pos].var[j];
+				p.indiv[pos].var[j] = aux;
+			}
+		}
+	}else{p.indiv[pos].var[rand()%(p.tamInd)] = rand()%p.acessP.size();}
 }
