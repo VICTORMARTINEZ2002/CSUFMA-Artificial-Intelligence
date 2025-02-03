@@ -55,7 +55,6 @@ Individuo bestFit(vector<int> s, vector<vector<float>> people, vector<vector<flo
 		s[menorp]=menorw;
 	}
 
-	Individuo is(people[0].size());	
-	is.setVar(s);	
+	Individuo is(acessP, people, s);	
 	return is;
 }

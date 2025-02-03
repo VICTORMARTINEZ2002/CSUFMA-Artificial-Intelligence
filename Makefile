@@ -1,3 +1,7 @@
+# To profile use:
+# g++ -Wall -Wextra -std=c++11 -pg -no-pie -O2 Source/main.cpp Source/Metrics/metrics.cpp Source/Functions/auxFunc.cpp Source/Leitura/read.cpp -o main.exe && main.exe && gprof main.exe gmon.out > profile.txt && echo Profiling completed. Check profile.txt.
+
+
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11
 

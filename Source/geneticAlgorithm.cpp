@@ -55,8 +55,9 @@ void AtualizaPop(Population& p, int pos, double fit, int ger){
 
 }
 
-void mutate(Population& p, int pos, double frac){
-	if(frac>.5){
+void mutate(Population& p, int pos, int currGer, int maxGer){
+	double frac=(currGer/maxGer);
+	if(frac>.5 && currGer<25){
 		for(int k=0; k<=(frac*FATOR*p.tamInd); k++){ 
 			int i = rand()%(p.tamInd);
 			int j = rand()%(p.tamInd);
@@ -66,5 +67,5 @@ void mutate(Population& p, int pos, double frac){
 				p.indiv[pos].var[j] = aux;
 			}
 		}
-	}else{p.indiv[pos].var[rand()%(p.tamInd)] = rand()%p.acessP.size();}
+	}else{for(int k=0; k<=(frac*FATOR*p.tamInd); k++) p.indiv[pos].var[rand()%(p.tamInd)] = rand()%p.acessP.size();}
 }

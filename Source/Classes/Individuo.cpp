@@ -26,6 +26,13 @@ public:
 		this->out =  0;
 	}
 
+	Individuo(const vector<vector<float>>& acessP, const vector<vector<float>>& people, const std::vector<int>& var){
+		this->var = std::vector<int>(var.size());
+		for(size_t i=0; i<=var.size()-1; i++){this->var[i]=var[i];}
+		this->out = outs();
+		this->fit = fitness(acessP, people, this->var);
+	}
+
 	// Gets
 	int getVar(size_t index) const{
 		if(index<var.size()){return var.at(index);}
@@ -39,17 +46,15 @@ public:
 	void setVars(const std::vector<int>& var){this->var=var;}
 	void setFit(double fit){this->fit = fit;}
 	void setOut(   int out){this->out = out;}
-	void setVar(std::vector<int> var){
-		this->var = std::vector<int>(var.size());
-		for(size_t i=0; i<=var.size()-1; i++){this->var[i]=var[i];}
-	}
+
+	// Fix
 	void fixOut(){this->out = outs();}
 
 	// Methods
-	void initIndividuo(vector<vector<float>> acessP, vector<vector<float>> people){
+	void initIndividuo(vector<vector<float>> acessP, vector<vector<float>> people, int flag){
 		for(size_t i=0; i<=var.size()-1; i++){
-			var[i]=rand()%(acessP.size());
-			//var[i]--; // Incluir o -1
+			var[i]=rand()%(acessP.size()+flag);
+			var[i] -= flag; // Incluir o -1
 		}
 		this->fit = fitness(acessP, people, this->var);
 		this->out = outs();

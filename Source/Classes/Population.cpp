@@ -63,7 +63,7 @@ public:
   
 
 	// Methods
-	void initPopulacao(){
+	void initPopulacao(int flag){
 		this->pior=0;
 		this->best=0;
 		this->sumFit=0;
@@ -71,7 +71,7 @@ public:
 		this->bestGer=1;
 		this->numMuta=0;
 		for(int i=0; i<=tamPop-1; i++){
-			indiv[i].initIndividuo(this->acessP, this->people);
+			indiv[i].initIndividuo(this->acessP, this->people, flag);
 			this->sumFit += indiv[i].getFit();
 			if(indiv[i].getFit()>indiv[this->pior].getFit()){this->pior=i;}
 			if(indiv[i].getFit()<indiv[this->best].getFit()){this->best=i;}

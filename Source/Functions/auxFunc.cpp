@@ -44,12 +44,8 @@ double fitness(const vector<vector<float>>& acessP, const vector<vector<float>>&
 	}
 
 	// Penalizar Não Conectados
-	double penl_nConetado = notConect * (max_dist+10);
-	
-	// Penalizar Violação Limite
-	double penl_Limite = (3*max_dist) * sum;
-	
-	return (mean_dist+penl_nConetado+penl_Limite)/solucao.size();
+	// Penalizar Violação Limite	
+	return (mean_dist + (notConect*(max_dist)) + ((10*max_dist)*sum))/solucao.size();
 }
 
 
