@@ -19,7 +19,7 @@
 #define ACESSP_PATH "Data/acessPoint.csv"
 
 #define MAXPOP 100
-#define MAXGER 1000
+#define MAXGER 10
 #define NUMCRU 75
 #define PMUTAC 85
 
@@ -111,7 +111,7 @@ int main(){
 		dataFile << i+acessP.size()-1 << " "
 				  << people[i][0]     << " "
 				  << people[i][1]     << " "
-				  << best.var[i] << std::endl;
+				  << p.indiv[p.best].var[i] << std::endl;
 	} dataFile.close();
 
 	std::ofstream gnuplotScript("plot_script.gp");

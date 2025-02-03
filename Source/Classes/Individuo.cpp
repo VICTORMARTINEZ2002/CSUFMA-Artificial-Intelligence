@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#include "../Metrics/Metrics.h"
+#include "../Metrics/metrics.h"
 #include "../Functions/auxFunc.h"
 
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-#include "../Metrics/Metrics.h"
+#include "../Metrics/metrics.h"
 
 using namespace std;
 

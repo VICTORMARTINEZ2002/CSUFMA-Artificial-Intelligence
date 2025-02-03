@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "../Metrics/Metrics.h"
+#include "../Metrics/metrics.h"
 #include "Individuo.cpp"
 
 class Population{
